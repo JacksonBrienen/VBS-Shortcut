@@ -34,15 +34,23 @@ public class ShortcutFactory {
 	 * @param linkPath - The path of the Shortcut that will be created
 	 */
 	public static void createShortcut(String source, String linkPath) {
-		String vbsCode = String.format(
-			  "Set wsObj = WScript.CreateObject(\"WScript.shell\")%n"
-			+ "scPath = \"%s\"%n"
-			+ "Set scObj = wsObj.CreateShortcut(scPath)%n"
-			+ "\tscObj.TargetPath = \"%s\"%n"
-			+ "scObj.Save%n",
-			linkPath, source
-			);
 		try {
+			File sourceFile = new File(source);
+			if(!sourceFile.exists()) {
+				throw new FileNotFoundException("The Path: "+sourceFile.getAbsolutePath()+" does not exist!");
+			}
+			source = sourceFile.getAbsolutePath();
+			source = new File(linkPath).getAbsolutePath();
+			
+			String vbsCode = String.format(
+				  "Set wsObj = WScript.CreateObject(\"WScript.shell\")%n"
+				+ "scPath = \"%s\"%n"
+				+ "Set scObj = wsObj.CreateShortcut(scPath)%n"
+				+ "\tscObj.TargetPath = \"%s\"%n"
+				+ "scObj.Save%n",
+				linkPath, source
+				);
+		
 			newVBS(vbsCode);
 		} catch (IOException | InterruptedException e) {
 			System.err.println("Could not create and run VBS!");
