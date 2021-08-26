@@ -1,0 +1,64 @@
+package vbs_sc;
+
+import java.io.*;
+
+/*
+ * @author Jackson N. Brienen
+ * Content Protected VIA GPL-2.0-only
+ * https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html
+ * Copyright (c) 2021 Jackson Nicholas Brienen
+ * https://github.com/JacksonBrienen/VBS-Shortcut
+ */
+public class ShortcutFactory {
+	/**
+	 * Creates a Shortcut on the desktop with the passed name and linked to the passed source<br>
+	 * Note - this will pause thread until shortcut has been created
+	 * @param source - The path to the source file to create a Shortcut to
+	 * @param linkName - The name of the Shortcut that will be created
+	 */
+	public static void createDesktopShortcut(String source, String linkName) {
+		String linkPath = System.getProperty("user.home")+"/Desktop/"+linkName;
+		createShortcut(source, linkPath);
+	}
+	
+	/**
+	 * Creates a Shortcut at the passed location linked to the passed source<br>
+	 * Note - this will pause thread until shortcut has been created
+	 * @param source - The path to the source file to create a Shortcut to
+	 * @param linkPath - The path of the Shortcut that will be created
+	 */
+	public static void createShortcut(String source, String linkPath) {
+		String vbsCode = String.format(
+			  "Set wsObj = WScript.CreateObject(\"WScript.shell\")%n"
+			+ "scPath = \"/%s\"%n"
+			+ "Set scObj = wsObj.CreateShortcut(scPath)%n"
+			+ "\tscObj.TargetPath = \"%s\"%n"
+			+ "scObj.Save%n",
+			linkPath, source
+			);
+		try {
+			newVBS(vbsCode);
+		} catch (IOException | InterruptedException e) {
+			System.err.println("Could not create and run VBS!");
+			e.printStackTrace();
+		} 
+	}
+	
+	/*
+	 * Creates a VBS file with the passed code and runs it, deleting it after the run has completed
+	 */
+	private static void newVBS(String code) throws IOException, InterruptedException {
+		File script = File.createTempFile("scvbs", ".vbs"); // File where script will be created
+		
+		// Writes to script file
+		FileWriter writer = new FileWriter(script);
+		writer.write(code);
+		writer.close();
+		
+		Process p = Runtime.getRuntime().exec( "wscript \""+script.getAbsolutePath()+"\""); // executes vbs code via cmd
+		p.waitFor(); // waits for process to finish
+		if(!script.delete()) { // deletes script
+			System.err.println("Warning Failed to delete tempory VBS File at: \""+script.getAbsolutePath()+"\"");
+		}
+	}
+}
