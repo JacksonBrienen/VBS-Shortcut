@@ -36,7 +36,7 @@ public class ShortcutFactory {
 	public static void createShortcut(String source, String linkPath) {
 		String vbsCode = String.format(
 			  "Set wsObj = WScript.CreateObject(\"WScript.shell\")%n"
-			+ "scPath = \"/%s\"%n"
+			+ "scPath = \"%s\"%n"
 			+ "Set scObj = wsObj.CreateShortcut(scPath)%n"
 			+ "\tscObj.TargetPath = \"%s\"%n"
 			+ "scObj.Save%n",
