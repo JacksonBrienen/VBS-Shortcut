@@ -9,6 +9,10 @@ import java.io.*;
  * Copyright (c) 2021 Jackson Nicholas Brienen
  * https://github.com/JacksonBrienen/VBS-Shortcut
  */
+/**
+ * @author Jackson N. Brienen
+ * @version 1.0
+ */
 public class ShortcutFactory {
 	/**
 	 * Creates a Shortcut on the desktop with the passed name and linked to the passed source<br>
