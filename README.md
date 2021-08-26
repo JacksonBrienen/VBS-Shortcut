@@ -8,3 +8,6 @@ This led me to create VBS-Shortcut, as the name states creating Shortcuts with V
 <h2>Important Notes</h2>
 The code you see is working on Windows 10 as of 2021, while it is anticipated to work with previous versions of windows, it cannot be expected to do so.<br>
 The Java Runtime Environment(JRE) used was 1.8.0_281<br>
+<h2>Use</h2>
+The code is fairly simple, so I don't think it really needed a JAR, but if you really want one it is located in the "dist" folder.<br>
+If you aren't using the JAR, and instead opt of the source code, please make sure that the Header is not removed.
