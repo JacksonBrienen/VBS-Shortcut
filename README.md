@@ -1,6 +1,6 @@
 # VBS-Shortcut
-<h2>Description</h2>
-The Simplest, that I have found, way to make a Shortcut in java, using built in windows tools like CMD and VBS.<br><br>
+The Simplest, that I have found, way to make a Shortcut in java, using built in windows tools like CMD and VBS.<br>
+<h2>Why I made this</h2>
 I've seen many good implementations Like JShortcut, by Jim McBeath, found at: https://github.com/jimmc/jshortcut<br>
 and expanding of JShortcut with mslinks by Dmitii Shamrikov, found at: https://github.com/BlackOverlord666/mslinks<br>
 For what I was needing at the time, while these implementations were great, I felt as If they were a bit over complicated for the simplicity that I needed.<br>
