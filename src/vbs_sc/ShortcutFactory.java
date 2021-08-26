@@ -8,6 +8,8 @@ import java.io.*;
  * https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html
  * Copyright (c) 2021 Jackson Nicholas Brienen
  * https://github.com/JacksonBrienen/VBS-Shortcut
+ *
+ * **PLEASE DO NOT REMOVE THIS HEADER**
  */
 /**
  * @author Jackson N. Brienen
