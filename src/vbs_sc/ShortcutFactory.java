@@ -40,7 +40,6 @@ public class ShortcutFactory {
 				throw new FileNotFoundException("The Path: "+sourceFile.getAbsolutePath()+" does not exist!");
 			}
 			source = sourceFile.getAbsolutePath();
-			source = new File(linkPath).getAbsolutePath();
 			
 			String vbsCode = String.format(
 				  "Set wsObj = WScript.CreateObject(\"WScript.shell\")%n"
