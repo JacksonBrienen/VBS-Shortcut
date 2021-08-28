@@ -13,7 +13,7 @@ import java.io.*;
  */
 /**
  * @author Jackson N. Brienen
- * @version 1.0
+ * @version 1.1
  */
 public class ShortcutFactory {
 	/**
@@ -21,8 +21,9 @@ public class ShortcutFactory {
 	 * Note - this will pause thread until shortcut has been created
 	 * @param source - The path to the source file to create a Shortcut to
 	 * @param linkName - The name of the Shortcut that will be created
+	 * @throws FileNotFoundException - if source File does not exist
 	 */
-	public static void createDesktopShortcut(String source, String linkName) {
+	public static void createDesktopShortcut(String source, String linkName) throws FileNotFoundException {
 		String linkPath = System.getProperty("user.home")+"/Desktop/"+linkName;
 		createShortcut(source, linkPath);
 	}
@@ -32,13 +33,14 @@ public class ShortcutFactory {
 	 * Note - this will pause thread until shortcut has been created
 	 * @param source - The path to the source file to create a Shortcut to
 	 * @param linkPath - The path of the Shortcut that will be created
+	 * @throws FileNotFoundException 
 	 */
-	public static void createShortcut(String source, String linkPath) {
+	public static void createShortcut(String source, String linkPath) throws FileNotFoundException {
+		File sourceFile = new File(source);
+		if(!sourceFile.exists()) {
+			throw new FileNotFoundException("The Path: "+sourceFile.getAbsolutePath()+" does not exist!");
+		}
 		try {
-			File sourceFile = new File(source);
-			if(!sourceFile.exists()) {
-				throw new FileNotFoundException("The Path: "+sourceFile.getAbsolutePath()+" does not exist!");
-			}
 			source = sourceFile.getAbsolutePath();
 			
 			String vbsCode = String.format(
